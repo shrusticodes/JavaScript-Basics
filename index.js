@@ -46,6 +46,8 @@ function submit() {
   const container = document.querySelector('#print');
   let fname = document.getElementById('fname').value;
   let age = parseInt(document.getElementById('age').value);
+  document.getElementById('fname').value = '';
+  document.getElementById('age').value = '';
   if (fname == '' || age == NaN) {
     alert('Enter the values in the text boxes');
   }
