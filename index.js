@@ -29,6 +29,7 @@ function display() {
   label2.append(br4);
   let but = document.createElement('button');
   but.innerHTML = 'SUBMIT';
+  but.setAttribute('id', 'main');
   but.addEventListener('click', function () {
     submit();
   });
