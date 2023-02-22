@@ -31,7 +31,11 @@ function display() {
   but.innerHTML = 'SUBMIT';
   but.setAttribute('id', 'main');
   but.addEventListener('click', function () {
-    submit();
+    try {
+      submit();
+    } catch (e) {
+      console.log(e);
+    }
   });
   container.append(label1);
   container.append(label2);
@@ -42,14 +46,20 @@ function submit() {
   const container = document.querySelector('#print');
   let fname = document.getElementById('fname').value;
   let age = parseInt(document.getElementById('age').value);
+  if (fname == '' || age == NaN) {
+    alert('Enter the values in the text boxes');
+  }
   let x = Math.floor(Math.random() * 1000 + 1);
   arr.forEach((o) => {
     if (x == o.id) {
       x = Math.floor(Math.random() * 1000 + 1);
     }
   });
-  let obj = new person(x, fname, age);
-  arr.push(obj);
+  let obj;
+  if (fname != '' && age != NaN) {
+    obj = new person(x, fname, age);
+    arr.push(obj);
+  }
   console.log(arr);
   const usersBox = document.createElement('div');
   usersBox.className = 'usersBox';
