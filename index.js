@@ -46,12 +46,16 @@ function submit() {
   const container = document.querySelector('#print');
   let fname = document.getElementById('fname').value;
   let age = parseInt(document.getElementById('age').value);
+  let x = Math.floor(Math.random() * 1000 + 1);
   document.getElementById('fname').value = '';
   document.getElementById('age').value = '';
+  append(x, fname, age);
+  createElements(x);
+}
+function append(x, fname, age) {
   if (fname == '' || age == NaN) {
     alert('Enter the values in the text boxes');
   }
-  let x = Math.floor(Math.random() * 1000 + 1);
   arr.forEach((o) => {
     if (x == o.id) {
       x = Math.floor(Math.random() * 1000 + 1);
@@ -63,27 +67,30 @@ function submit() {
     arr.push(obj);
   }
   console.log(arr);
+  return arr;
+}
+function createElements(x) {
+  const container = document.querySelector('#print');
   const usersBox = document.createElement('div');
   usersBox.className = 'usersBox';
   const list = document.createElement('p');
+  list.className = 'list';
+  let m = arr.findIndex((o) => o.id == parseInt(x));
   const btn = document.createElement('button');
-  btn.id = arr[i].id;
-  btn.innerHTML = 'Delete';
+  btn.id = x;
+  btn.className = 'delete';
+  btn.innerText = 'Delete';
   btn.addEventListener('click', function () {
-    let m = arr.findIndex((o) => {
-      o.id == parseInt(btn.id);
-    });
-    arr.splice(m, 1);
+    let n = arr.findIndex((o) => o.id == parseInt(x));
+    arr.splice(n, 1);
+    console.log(n);
+    console.log(arr);
     list.removeChild(btn);
     usersBox.removeChild(list);
     container.removeChild(usersBox);
-    console.log(arr);
-    i = arr.length - 1;
-    if (i == -1) i = 0;
   });
-  list.innerText = `${arr[i].name}: ${arr[i].age}  `;
+  list.innerText = `${arr[m].name}: ${arr[m].age}  `;
   usersBox.appendChild(list);
   list.appendChild(btn);
   container.appendChild(usersBox);
-  i++;
 }
